@@ -7,7 +7,7 @@ to `/tmp/quote.json` file when running the container.
 Quote example:
 ```json
 {
-    "quote": "Some funny qoute goes here :)"
+    "quote": "neki super kul quote"
 }
 ```
 
