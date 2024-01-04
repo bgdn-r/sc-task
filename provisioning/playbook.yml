@@ -1,3 +1,10 @@
+# Provisioning playbook
+
+# Updates the APT
+# Installs the Docker engine
+# Configures the cronjob for fetcher script
+# Configures the cronjob for quoter container
+
 ---
 - name: "Provisioning"
   hosts: all
