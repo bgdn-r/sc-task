@@ -1,0 +1,38 @@
+---
+- name: "Copy quoter directory"
+  copy:
+    src: ../../../quoter
+    dest: "/home/{{vagrant_user}}/"
+    owner: "{{vagrant_user}}"
+    mode: 0644
+
+- name: "Build quoter Docker image"
+  community.general.docker_image:
+    build:
+      path: "/home/{{vagrant_user}}/quoter"
+    name: quoter
+    source: build
+
+- name: "Create /tmp/quotes file"
+  file:
+    path: /tmp/quotes
+    state: directory
+    owner: "{{vagrant_user}}"
+    group: "{{vagrant_user}}"
+    mode: '0755' 
+
+- name: "Create quote.json file"
+  copy:
+    dest: /tmp/quotes/quote.json
+    content: ""
+    owner: "{{vagrant_user}}"
+    group: "{{vagrant_user}}"
+    mode: 0644
+
+- name: "Configure cron job to run quoter every hour on it's 15th minute"
+  cron:
+    name: quoter
+    minute: "*"
+    hour: "*"
+    job: "docker run -v /tmp/quotes/quote.json:/tmp/quote.json quoter"
+    user: "{{vagrant_user}}"

@@ -1,0 +1,20 @@
+---
+- name: "Copy fetcher directory"
+  copy:
+    src: ../../../fetcher
+    dest: "/home/{{vagrant_user}}/"
+    owner: "{{vagrant_user}}"
+    mode: 0644
+
+- name: "Set script permissions"
+  file: 
+    path: "/home/{{vagrant_user}}/fetcher/fetcher.sh"
+    mode: 0774
+
+- name: "Configure cron job to run fetcher every hour on the hour"
+  cron:
+    name: fetcher
+    minute: "*"
+    hour: "*"
+    job: "/home/{{vagrant_user}}/fetcher/fetcher.sh {{api_uri}}"
+    user: "{{vagrant_user}}"
