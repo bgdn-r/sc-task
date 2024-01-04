@@ -18,5 +18,7 @@
     name: quoter
     minute: "15"
     hour: "*"
-    job: "docker run -v /tmp/store/file.json:/tmp/quote.json quoter >> /home/{{vagrant_user}}/quotes.txt && docker container prune -f"
+    # I've added the deletion of stopped containers and unused volumes
+    # Each quote is appended to the /home/vagrant/quotes.txt file
+    job: "docker run -v /tmp/store/file.json:/tmp/quote.json quoter >> /home/{{vagrant_user}}/quotes.txt && docker container prune -f && docker volume prune -af"
     user: "{{vagrant_user}}"
