@@ -1,9 +1,8 @@
 # quoter
 
-Quoter is a python script packaged as a Docker image that prints the
-mounted quote to the standard output.
-
-The quote is mounted as a Docker volume and read by the script.
+Quoter is a Python script packaged as a Docker image that prints to the
+standard output the quote from `quote.json` file, which *must* be mounted 
+to `/tmp/quote.json` file when running the container.
 
 Quote example:
 ```json
@@ -20,5 +19,5 @@ docker build -t quoter .
 ## Running the container
 ```bash
 # Mount the quote.json file to container
-docker run -v /tmp/quotes/quote.json:/tmp/quote.json quoter
+docker run -v quote.json:/tmp/quote.json quoter
 ```
