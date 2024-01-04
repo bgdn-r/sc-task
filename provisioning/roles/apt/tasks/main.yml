@@ -1,5 +1,5 @@
 ---
-- name: "Run APT update and autoclean"
+- name: "Update and autoclean apt"
   apt:
     update_cache: true
     autoclean: true
