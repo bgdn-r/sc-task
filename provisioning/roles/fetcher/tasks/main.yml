@@ -14,7 +14,7 @@
 - name: "Configure cron job to run fetcher every hour on the hour"
   cron:
     name: fetcher
-    minute: "*"
+    minute: "0"
     hour: "*"
     job: "/home/{{vagrant_user}}/fetcher/fetcher.sh {{api_uri}}"
     user: "{{vagrant_user}}"

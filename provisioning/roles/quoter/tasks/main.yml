@@ -13,26 +13,10 @@
     name: quoter
     source: build
 
-- name: "Create /tmp/quotes file"
-  file:
-    path: /tmp/quotes
-    state: directory
-    owner: "{{vagrant_user}}"
-    group: "{{vagrant_user}}"
-    mode: '0755' 
-
-- name: "Create quote.json file"
-  copy:
-    dest: /tmp/quotes/quote.json
-    content: ""
-    owner: "{{vagrant_user}}"
-    group: "{{vagrant_user}}"
-    mode: 0644
-
 - name: "Configure cron job to run quoter every hour on it's 15th minute"
   cron:
     name: quoter
-    minute: "*"
+    minute: "15"
     hour: "*"
-    job: "docker run -v /tmp/quotes/quote.json:/tmp/quote.json quoter"
+    job: "docker run -v /tmp/store/file.json:/tmp/quote.json quoter >> /home/{{vagrant_user}}/quotes.txt && docker container prune -f"
     user: "{{vagrant_user}}"
