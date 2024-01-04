@@ -39,9 +39,17 @@ the command above.
 
 ## Applications
 
-[Fetcher](./fetcher/README.md)
+You can choose to pull the Docker image for quoter from the remote
+registry by setting the `quoter_docker_image` variable in `all.yml`
+```bash
+vim ./provisioning/group_vars/all/all.yml
+```
+```yaml
+quoter_docker_image: "{registry_name}/quoter:latest"
+```
 
-[Quoter](./quoter/README.md)
+Otherwise the image is built on the VM directly.
 
-> Note: Mozda nije trebalo ali sam dodao da se quotes pisu u $HOME/quotes.txt
-file na VM-u, da ne bih talozio zaustavljene container-e.
+[Fetcher](./fetcher/README.md) docs
+
+[Quoter](./quoter/README.md) docs
