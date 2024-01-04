@@ -19,29 +19,21 @@ if [ ! -d $QUOTE_STORE ]; then
     echo "Done."
 fi
 
-# TIMESTAMP is the time at which the quote was fetched from the API
-TIMESTAMP=$(date +%s)
-
-# OUTPUT is the name of the file in which the fetched quote is stored
-# It is prefixed with the time at which the quote was fetched
-OUTPUT="$TIMESTAMP.json"
+# QUOTE is the name of the file in which the fetched quote is stored
+QUOTE="quote.json"
 
 # STATUS_CODE is the HTTP resposne status code returned by the API
-STATUS_CODE=$(curl -o $QUOTE_STORE/$OUTPUT -w '%{http_code}' -s $API_URI)
+STATUS_CODE=$(curl -o $QUOTE_STORE/$QUOTE -w '%{http_code}' -s $API_URI)
 
 if [ $STATUS_CODE -eq 200 ]; then
     echo "Quote fetched successfully."
-    echo "Quote location: $QUOTE_STORE/$OUTPUT"
-    
-    # Copy the fetched quote as the current quote
-    cp $QUOTE_STORE/$OUTPUT "$QUOTE_STORE/current.json"
     exit 0
 else
     echo "Error: Unexpected HTTP response status."
     echo "  Expected: 200"
     echo "  Received: $STATUS_CODE"
 
-    rm $QUOTE_STORE/$OUTPUT
+    rm $QUOTE_STORE/$QUOTE
 
     echo "Exiting..."
     exit 1
