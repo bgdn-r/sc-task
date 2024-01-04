@@ -5,6 +5,7 @@
     dest: "/home/{{vagrant_user}}/"
     owner: "{{vagrant_user}}"
     mode: 0644
+  when: quoter_docker_image == ""
 
 - name: "Build quoter Docker image"
   community.general.docker_image:
@@ -12,13 +13,22 @@
       path: "/home/{{vagrant_user}}/quoter"
     name: quoter
     source: build
+  when: quoter_docker_image == ""
 
-- name: "Configure cron job to run quoter every hour on it's 15th minute"
+- name: "Configure cron job to run quoter every hour on it's 15th minute with local image"
   cron:
     name: quoter
     minute: "15"
     hour: "*"
-    # I've added the deletion of stopped containers and unused volumes
-    # Each quote is appended to the /home/vagrant/quotes.txt file
-    job: "docker run -v /tmp/fetcher/file.json:/tmp/quote.json quoter >> /home/{{vagrant_user}}/quotes.txt && docker container prune -f && docker volume prune -af"
+    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json quoter >> /home/{{vagrant_user}}/quotes.txt"
     user: "{{vagrant_user}}"
+  when: quoter_docker_image == ""
+
+- name: "Configure cron job to run quoter every hour on it's 15th minute with image from registry"
+  cron:
+    name: quoter
+    minute: "15"
+    hour: "*"
+    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json {{quoter_docker_image}} >> /home/{{vagrant_user}}/quotes.txt"
+    user: "{{vagrant_user}}"
+  when: quoter_docker_image != ""

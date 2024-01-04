@@ -21,3 +21,8 @@ docker build -t quoter .
 # Mount the quote.json file to container
 docker run -v quote.json:/tmp/quote.json quoter
 ```
+
+## Push the image to the registry
+```bash
+docker tag quoter <registry>/quoter:latest 
+```
