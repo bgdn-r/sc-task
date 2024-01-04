@@ -1,2 +1,5 @@
+# vagrant_user name
 vagrant_user: vagrant
+
+# api_uri that will be given to fetcher
 api_uri: https://api.kanye.rest
