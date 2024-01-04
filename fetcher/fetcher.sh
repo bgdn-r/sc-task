@@ -10,7 +10,7 @@ if [ -z "$API_URI" ]; then
 fi
 
 # STORE_DIR is the directory where fetched JSON files are stored
-STORE_DIR=/tmp/store
+STORE_DIR=/tmp/fetcher
 
 # FILE_NAME is the name of the file in which the fetched JSON is stored
 FILE_NAME="file.json"
