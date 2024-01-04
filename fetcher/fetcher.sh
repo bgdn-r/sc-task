@@ -13,7 +13,7 @@ fi
 STORE_DIR=/tmp/fetcher
 
 # FILE_NAME is the name of the file in which the fetched JSON is stored
-FILE_NAME="file.json"
+FILE_NAME="file-$(date +%s).json"
 
 if [ ! -d $STORE_DIR ]; then
     echo "STORE_DIR directory does not exist."
@@ -27,6 +27,7 @@ STATUS_CODE=$(curl -o $STORE_DIR/$FILE_NAME -w '%{http_code}' -s $API_URI)
 
 if [ $STATUS_CODE -eq 200 ]; then
     echo "JSON file fetched successfully."
+    cp $STORE_DIR/$FILE_NAME "$STORE_DIR/file.json"
     exit 0
 else
     echo "Error: Unexpected HTTP response status."
