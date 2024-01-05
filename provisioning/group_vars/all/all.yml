@@ -1,6 +1,2 @@
 # vagrant_user name
 vagrant_user: vagrant
-
-# quoter_docker_image is an optional parameter that
-# refetences the Docker image for quoter from registry
-quoter_docker_image: ""
