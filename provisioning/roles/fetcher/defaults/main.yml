@@ -1,4 +1,7 @@
----
 # api_uri that will be given to fetcher
 api_uri: https://api.kanye.rest
+
+# fetcher_dir is the directory where
+# the fetcher. script is located
+fetcher_dir: ../../../fetcher
 

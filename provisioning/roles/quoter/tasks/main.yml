@@ -1,7 +1,7 @@
 ---
 - name: "Copy quoter directory"
   copy:
-    src: ../../../quoter
+    src: "{{quoter_dir}}"
     dest: "/home/{{vagrant_user}}/"
     owner: "{{vagrant_user}}"
     mode: 0644

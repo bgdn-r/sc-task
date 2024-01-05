@@ -1,7 +1,7 @@
 ---
 - name: "Copy fetcher directory"
   copy:
-    src: ../../../fetcher
+    src: "{{fetcher_dir}}"
     dest: "/home/{{vagrant_user}}/"
     owner: "{{vagrant_user}}"
     mode: 0644
