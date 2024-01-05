@@ -1,12 +1,6 @@
 # vagrant_user name
 vagrant_user: vagrant
 
-# api_uri that will be given to fetcher
-api_uri: https://api.kanye.rest
-
-# last_fetched_file
-last_fetched_file: /tmp/fetcher/file.json
-
 # quoter_docker_image is an optional parameter that
 # refetences the Docker image for quoter from registry
 quoter_docker_image: ""

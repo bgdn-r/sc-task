@@ -20,7 +20,7 @@
     name: quoter
     minute: "15"
     hour: "*"
-    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json quoter >> /home/{{vagrant_user}}/quotes.txt"
+    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json quoter >> /home/{{vagrant_user}}/quotes.txt && docker container prune -f && docker volume prune -af"
     user: "{{vagrant_user}}"
   when: quoter_docker_image == ""
 
@@ -29,6 +29,6 @@
     name: quoter
     minute: "15"
     hour: "*"
-    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json {{quoter_docker_image}} >> /home/{{vagrant_user}}/quotes.txt"
+    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json {{quoter_docker_image}} >> /home/{{vagrant_user}}/quotes.txt && docker container prune -f && docker volume prune -af"
     user: "{{vagrant_user}}"
   when: quoter_docker_image != ""
