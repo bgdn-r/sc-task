@@ -39,17 +39,11 @@ the command above.
 
 ## Applications
 
-You can choose to pull the Docker image for quoter from the remote
-registry by setting the `quoter_docker_image` variable in `all.yml`
-```bash
-vim ./provisioning/group_vars/all/all.yml
-```
-```yaml
-quoter_docker_image: "{registry_name}/quoter:latest"
-```
-
-Otherwise the image is built on the VM directly.
-
 [Fetcher](./fetcher/README.md) docs
+> You can set the API URI for getting the JSON data
+in `./provisioning/roles/fetcher/defaults/main.yml`
 
 [Quoter](./quoter/README.md) docs
+> You can set the quoter Docker image if you want to pull the image
+from the registry in instead of building it on the VM
+`./provisioning/roles/quoter/defaults/main.yml`
