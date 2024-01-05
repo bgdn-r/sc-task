@@ -1,11 +1,21 @@
 ---
-# last_fetched_file
+# last_fetched_file DO NOT EDIT
 last_fetched_file: /tmp/fetcher/file.json
 
 # quoter_docker_image is an optional parameter that
 # refetences the Docker image for quoter from registry
 #
-# working example:
+# working example
 # quoter_docker_image: "bgdnr/quoter:latest"
 #
 quoter_docker_image: ""
+
+# remove_containers decides whether the containers
+# and should be deleted after they execute
+# this option stores the quotes into a file on
+# the host
+#
+# file in which you can see the quotes is at
+# $HOME/quotes.txt
+#
+remove_containers: false

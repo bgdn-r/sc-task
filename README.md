@@ -44,6 +44,7 @@ the command above.
 in `./provisioning/roles/fetcher/defaults/main.yml`
 
 [Quoter](./quoter/README.md) docs
-> You can set the quoter Docker image if you want to pull the image
-from the registry in instead of building it on the VM
+> You can edit the default variables for the quoter by
+making changes to the following file:
 `./provisioning/roles/quoter/defaults/main.yml`
+

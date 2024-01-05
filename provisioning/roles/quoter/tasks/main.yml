@@ -15,20 +15,38 @@
     source: build
   when: quoter_docker_image == ""
 
-- name: "Configure cron job to run quoter every hour on it's 15th minute with local image"
+- name: "Configure cron job to run quoter every hour on it's 15th minute with local image and container removal"
   cron:
     name: quoter
     minute: "15"
     hour: "*"
-    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json quoter >> /home/{{vagrant_user}}/quotes.txt && docker container prune -f && docker volume prune -af"
+    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json --rm quoter >> /home/{{vagrant_user}}/quotes.txt"
     user: "{{vagrant_user}}"
-  when: quoter_docker_image == ""
+  when: (quoter_docker_image == "") and (remove_containers == true)
 
-- name: "Configure cron job to run quoter every hour on it's 15th minute with image from registry"
+- name: "Configure cron job to run quoter every hour on it's 15th minute with image from registry and container removal"
   cron:
     name: quoter
     minute: "15"
     hour: "*"
-    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json {{quoter_docker_image}} >> /home/{{vagrant_user}}/quotes.txt && docker container prune -f && docker volume prune -af"
+    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json --rm {{quoter_docker_image}} >> /home/{{vagrant_user}}/quotes.txt"
     user: "{{vagrant_user}}"
-  when: quoter_docker_image != ""
+  when: (quoter_docker_image != "") and (remove_containers == true) 
+
+- name: "Configure cron job to run quoter every hour on it's 15th minute with local image and no container removal"
+  cron:
+    name: quoter
+    minute: "15"
+    hour: "*"
+    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json quoter"
+    user: "{{vagrant_user}}"
+  when: (quoter_docker_image == "") and (remove_containers == false) 
+
+- name: "Configure cron job to run quoter every hour on it's 15th minute with image from registry and no container removal"
+  cron:
+    name: quoter
+    minute: "15"
+    hour: "*"
+    job: "docker run -v {{last_fetched_file}}:/tmp/quote.json {{quoter_docker_image}}"
+    user: "{{vagrant_user}}"
+  when: (quoter_docker_image != "") and (remove_containers == false) 
